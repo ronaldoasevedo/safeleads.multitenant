@@ -8,6 +8,8 @@
     <Company>Ronaldo Asevedo</Company>
     <Copyright>Copyright ©2020 Ronaldo Asevedo</Copyright>
     <PackageId>Safeleads.MultiTenant.AspNetCore</PackageId>
+    <Version>5.0.6</Version>
+    <RepositoryUrl>https://github.com/ronaldoasevedo/safeleads.multitenant</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -17,12 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using MultiTenantIdentityDbContextShould;
 using Xunit;
 
 namespace EntityTypeBuilderExtensionsShould
@@ -94,14 +92,7 @@ namespace EntityTypeBuilderExtensionsShould
             return db;
         }
 
-        private TestIdentityDbContext GetTestIdentityDbContext(TenantInfo tenant1)
-        {
-            var _connection = new SqliteConnection("DataSource=:memory:");
-            var options = new DbContextOptionsBuilder()
-                    .UseSqlite(_connection)
-                    .Options;
-            return new TestIdentityDbContext(tenant1, options);
-        }
+      
 
         [Fact]
         public void SetMultiTenantAnnotation()
@@ -262,67 +253,6 @@ namespace EntityTypeBuilderExtensionsShould
             }
         }
 
-        [Fact]
-        public void AdjustRoleIndex()
-        {
-            var tenant1 = new TenantInfo("abc", "abc", "abc",
-                "DataSource=testdb.db", null);
-            using (var c = GetTestIdentityDbContext(tenant1))
-            {
-                var props = new List<IProperty>();
-                props.Add(c.Model.FindEntityType(typeof(IdentityRole)).FindProperty("NormalizedName"));
-                props.Add(c.Model.FindEntityType(typeof(IdentityRole)).FindProperty("TenantId"));
 
-                var index = c.Model.FindEntityType(typeof(IdentityRole)).FindIndex(props);
-                Assert.NotNull(index);
-                Assert.True(index.IsUnique);
-            }
-        }
-
-        [Fact]
-        public void AdjustUserLoginKey()
-        {
-            var tenant1 = new TenantInfo("abc", "abc", "abc",
-                "DataSource=testdb.db", null);
-            using (var c = GetTestIdentityDbContext(tenant1))
-            {
-                Assert.True(c.Model.FindEntityType(typeof(IdentityUserLogin<string>)).FindProperty("Id").IsPrimaryKey());
-            }
-        }
-
-        [Fact]
-        public void AddUserLoginIndex()
-        {
-            var tenant1 = new TenantInfo("abc", "abc", "abc",
-                "DataSource=testdb.db", null);
-            using (var c = GetTestIdentityDbContext(tenant1))
-            {
-                var props = new List<IProperty>();
-                props.Add(c.Model.FindEntityType(typeof(IdentityUserLogin<string>)).FindProperty("LoginProvider"));
-                props.Add(c.Model.FindEntityType(typeof(IdentityUserLogin<string>)).FindProperty("ProviderKey"));
-                props.Add(c.Model.FindEntityType(typeof(IdentityUserLogin<string>)).FindProperty("TenantId"));
-
-                var index = c.Model.FindEntityType(typeof(IdentityUserLogin<string>)).FindIndex(props);
-                Assert.NotNull(index);
-                Assert.True(index.IsUnique);
-            }
-        }
-
-        [Fact]
-        public void AdjustUserIndex()
-        {
-            var tenant1 = new TenantInfo("abc", "abc", "abc",
-                "DataSource=testdb.db", null);
-            using (var c = GetTestIdentityDbContext(tenant1))
-            {
-                var props = new List<IProperty>();
-                props.Add(c.Model.FindEntityType(typeof(IdentityUser)).FindProperty("NormalizedUserName"));
-                props.Add(c.Model.FindEntityType(typeof(IdentityUser)).FindProperty("TenantId"));
-
-                var index = c.Model.FindEntityType(typeof(IdentityUser)).FindIndex(props);
-                Assert.NotNull(index);
-                Assert.True(index.IsUnique);
-            }
-        }
     }
 }

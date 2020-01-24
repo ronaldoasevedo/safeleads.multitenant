@@ -7,17 +7,19 @@
     <Authors>Ronaldo Asevedo</Authors>
     <Copyright>Copyright ©2020 Ronaldo Asevedo</Copyright>
     <PackageId>Safeleads.MultiTenant.EntityFrameworkCore</PackageId>
+    <Version>5.0.6</Version>
+    <RepositoryUrl>https://github.com/ronaldoasevedo/safeleads.multitenant</RepositoryUrl>
   </PropertyGroup>
 
   <Choose>
     <When Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
       <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
       </ItemGroup>
     </When>
     <When Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
       <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.6" />
       </ItemGroup>
     </When>
   </Choose>

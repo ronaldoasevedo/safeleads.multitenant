@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -36,7 +37,7 @@ namespace Finbuckle.MultiTenant.EntityFrameworkCore
         internal static LambdaExpression GetQueryFilter(this EntityTypeBuilder builder)
         {
 #if NETSTANDARD2_1
-            return builder.Metadata.GetQueryFilter();
+            return builder.Metadata.QueryFilter;
 #elif NETSTANDARD2_0
             return builder.Metadata.QueryFilter;
 #else
@@ -110,39 +111,12 @@ namespace Finbuckle.MultiTenant.EntityFrameworkCore
 
             Type clrType = builder.Metadata.ClrType;
 
-            if (clrType != null)
-            {
-                if (clrType.ImplementsOrInheritsUnboundGeneric(typeof(IdentityUser<>)))
-                {
-                    UpdateIdentityUserIndex(builder);
-                }
-
-                if (clrType.ImplementsOrInheritsUnboundGeneric(typeof(IdentityRole<>)))
-                {
-                    UpdateIdentityRoleIndex(builder);
-                }
-
-                if (clrType.ImplementsOrInheritsUnboundGeneric(typeof(IdentityUserLogin<>)))
-                {
-                    UpdateIdentityUserLoginPrimaryKey(builder);
-                    AddIdentityUserLoginIndex(builder);
-                }
-            }
+           
 
             return builder;
         }        
 
-        private static void UpdateIdentityUserIndex(this EntityTypeBuilder builder)
-        {
-            builder.RemoveIndex("NormalizedUserName");
-            builder.HasIndex("NormalizedUserName", "TenantId").HasName("UserNameIndex").IsUnique();
-        }
-
-        private static void UpdateIdentityRoleIndex(this EntityTypeBuilder builder)
-        {
-            builder.RemoveIndex("NormalizedName");
-            builder.HasIndex("NormalizedName", "TenantId").HasName("RoleNameIndex").IsUnique();
-        }
+       
 
         private static void UpdateIdentityUserLoginPrimaryKey(this EntityTypeBuilder builder)
         {
@@ -161,9 +135,8 @@ namespace Finbuckle.MultiTenant.EntityFrameworkCore
         private static void RemoveIndex(this EntityTypeBuilder builder, string propName)
         {
 #if NETSTANDARD2_1
-            var prop = builder.Metadata.FindProperty(propName);
-            var index = builder.Metadata.FindIndex(prop);
-            builder.Metadata.RemoveIndex(index);
+            var props = new List<IProperty>(new[] { builder.Metadata.FindProperty(propName) });
+            builder.Metadata.RemoveIndex(props);
 #elif NETSTANDARD2_0
             var props = new List<IProperty>(new[] { builder.Metadata.FindProperty(propName) });
             builder.Metadata.RemoveIndex(props);
