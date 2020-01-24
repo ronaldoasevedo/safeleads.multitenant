@@ -1,29 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <Title>Finbuckle.MultiTenant.EntityFrameworkCore</Title>
     <Description>Entity Framework Core support for Finbuckle.MultiTenant.</Description>
     <Authors>Ronaldo Asevedo</Authors>
     <Copyright>Copyright ©2020 Ronaldo Asevedo</Copyright>
     <PackageId>Safeleads.MultiTenant.EntityFrameworkCore</PackageId>
-    <Version>5.0.6</Version>
+    <Version>5.0.7</Version>
     <RepositoryUrl>https://github.com/ronaldoasevedo/safeleads.multitenant</RepositoryUrl>
   </PropertyGroup>
-
-  <Choose>
-    <When Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-      <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
-      </ItemGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-      <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.6" />
-      </ItemGroup>
-    </When>
-  </Choose>
-
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+  </ItemGroup>
   <ItemGroup>
       <ProjectReference Include="../Finbuckle.MultiTenant.Core/Finbuckle.MultiTenant.Core.csproj" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;netcoreapp3.0;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -9,24 +9,9 @@
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
-
-  <Choose>
-    <When Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
-      <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.0" />
-      </ItemGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
-      <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.0" />
-      </ItemGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-      <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.14" />
-      </ItemGroup>
-    </When>
-  </Choose>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Finbuckle.MultiTenant.Core.Test/Finbuckle.Multitenant.Core.Test.csproj" />

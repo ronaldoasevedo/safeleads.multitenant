@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;netcoreapp3.0;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;</TargetFrameworks>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Description>Metapackage for Finbuckle.MultiTenant.</Description>
     <PackageTags>finbuckle;multitenant;multitenancy;aspnet;aspnetcore;entityframework;entityframework-core;efcore</PackageTags>
@@ -9,7 +9,7 @@
     <Company>Nerdscode</Company>
     <Copyright>Copyright ©2020 Nerdscode</Copyright>
     <PackageId>Safeleads.MultiTenant</PackageId>
-    <Version>5.0.6</Version>
+    <Version>5.0.7</Version>
     <RepositoryUrl>https://github.com/ronaldoasevedo/safeleads.multitenant</RepositoryUrl>
   </PropertyGroup>
 

@@ -36,13 +36,8 @@ namespace Finbuckle.MultiTenant.EntityFrameworkCore
 
         internal static LambdaExpression GetQueryFilter(this EntityTypeBuilder builder)
         {
-#if NETSTANDARD2_1
             return builder.Metadata.QueryFilter;
-#elif NETSTANDARD2_0
-            return builder.Metadata.QueryFilter;
-#else
-#error No valid path!
-#endif
+
         }
 
         /// <summary>
@@ -134,15 +129,9 @@ namespace Finbuckle.MultiTenant.EntityFrameworkCore
 
         private static void RemoveIndex(this EntityTypeBuilder builder, string propName)
         {
-#if NETSTANDARD2_1
             var props = new List<IProperty>(new[] { builder.Metadata.FindProperty(propName) });
             builder.Metadata.RemoveIndex(props);
-#elif NETSTANDARD2_0
-            var props = new List<IProperty>(new[] { builder.Metadata.FindProperty(propName) });
-            builder.Metadata.RemoveIndex(props);
-#else
-#error No valid path!
-#endif
+
         }
     }
 }
