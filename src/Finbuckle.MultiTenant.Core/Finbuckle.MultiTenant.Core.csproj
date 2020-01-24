@@ -5,6 +5,9 @@
     
     <Title>Finbuckle.MultiTenant.Core</Title>
     <Description>Core package for Finbuckle.MultiTenant.</Description>
+    <Authors>Ronaldo Asevedo</Authors>
+    <Copyright>Copyright ©2020 Ronaldo Asevedo</Copyright>
+    <PackageId>Safeleads.MultiTenant.Core</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
