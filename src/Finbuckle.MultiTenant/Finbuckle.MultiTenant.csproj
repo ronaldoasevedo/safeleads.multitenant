@@ -9,7 +9,7 @@
     <Company>Nerdscode</Company>
     <Copyright>Copyright ©2020 Nerdscode</Copyright>
     <PackageId>Safeleads.MultiTenant</PackageId>
-    <Version>5.0.7</Version>
+    <Version>5.0.8</Version>
     <RepositoryUrl>https://github.com/ronaldoasevedo/safeleads.multitenant</RepositoryUrl>
   </PropertyGroup>
 
