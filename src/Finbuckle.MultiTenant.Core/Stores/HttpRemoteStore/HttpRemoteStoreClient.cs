@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace Finbuckle.MultiTenant.Stores
                 return null;
 
             var json = await response.Content.ReadAsStringAsync();
-            var anon = new { Id = "", Identifier = "", Name = "", ConnectionString = "" };
+            var anon = new { Id = "", Identifier = "", Name = "", ConnectionString = "", Items = new Dictionary<string, object>() };
             var settings = new JsonSerializerSettings
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore
@@ -47,7 +48,7 @@ namespace Finbuckle.MultiTenant.Stores
 
             var result = JsonConvert.DeserializeAnonymousType(json, anon);
 
-            return new TenantInfo(result.Id, result.Identifier, result.Name, result.ConnectionString, null);
+            return new TenantInfo(result.Id, result.Identifier, result.Name, result.ConnectionString, result.Items);
         }
     }
 }
